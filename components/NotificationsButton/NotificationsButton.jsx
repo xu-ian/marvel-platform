@@ -17,6 +17,8 @@ import NotificationList from '../NotificationList';
 
 import Firebase from '../Reactfire/Firebase';
 
+import styles from './styles';
+
 /**
  * A button component that toggles the visibility of the notifications sidebar.
  *
@@ -32,7 +34,7 @@ const NotificationsButton = () => {
 
   const notificationsButton = () => {
     return (
-      <Badge badgeContent={notifications} size="large" color="error">
+      <Badge badgeContent={notifications} {...styles.notificationsBadge}>
         <IconButton onClick={toggleNotificationSidebar} aria-label="toggle">
           <NotificationsIcon />
         </IconButton>
@@ -42,26 +44,13 @@ const NotificationsButton = () => {
 
   const notificationsDropdown = () => {
     return (
-      <Box
-        sx={{
-          minWidth: 600,
-          minHeight: 100,
-          position: 'fixed',
-          top: 100,
-          right: 50,
-          visibility: notificationsShow ? 'visible' : 'hidden',
-        }}
-      >
-        <Card variant="outlined">
+      <Box {...styles.notificationsBox}>
+        <Card {...styles.notificationsMenuBorder}>
           <CardContent>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h5">Notifications</Typography>
+            <Box {...styles.notificationsTitleBar}>
+              <Typography {...styles.notificationsTitle}>
+                Notifications
+              </Typography>
               <IconButton onClick={toggleNotificationSidebar}>
                 <CloseIcon />
               </IconButton>
@@ -81,7 +70,9 @@ const NotificationsButton = () => {
   return (
     <>
       {notificationsButton()}
-      {notificationsDropdown()}
+      <Box sx={{ visibility: notificationsShow ? 'visible' : 'hidden' }}>
+        {notificationsDropdown()}
+      </Box>
     </>
   );
 };

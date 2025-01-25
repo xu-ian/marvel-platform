@@ -1,8 +1,10 @@
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
-import ErrorIcon from '@mui/icons-material/Error';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 import { Box, Button, Divider, Typography } from '@mui/material';
+
+import styles from './styles';
 
 import { setReadStatus } from '@/libs/services/notifications/setReadStatus';
 
@@ -24,29 +26,28 @@ import { setReadStatus } from '@/libs/services/notifications/setReadStatus';
 
 const Notification = (props) => {
   const { notif } = props;
-
   const messageIcon = () => {
     if (notif.is_read) {
-      return (
-        <CheckCircleIcon
-          fontSize="large"
-          aria-label="readIcon"
-          sx={{ margin: '3px' }}
-        />
-      );
+      return <NotificationsNoneIcon {...styles.notifIcon} />;
     }
     return (
-      <ErrorIcon
+      <NotificationsIcon
         fontSize="large"
         aria-label="unreadIcon"
-        sx={{ margin: '3px' }}
+        sx={{
+          padding: '2px',
+          borderRadius: '50%',
+          border: '3px solid #9D7BFF',
+          margin: '5px 15px 5px 5px',
+          color: '#9D7BFF',
+        }}
       />
     );
   };
 
   const notificationTitle = () => {
     return (
-      <Typography>
+      <Typography {...styles.notifTitle}>
         {notif.type} - {notif.title}
       </Typography>
     );
@@ -57,21 +58,21 @@ const Notification = (props) => {
       notificate.date.seconds * 1000 +
       Math.floor(notificate.date.nanoseconds / 1000000);
     const date = new Date(milliseconds);
-    const ampm = Math.floor(date.getHours() / 12) < 1 ? 'AM' : 'PM';
+    const ampm = Math.floor(date.getHours() / 12) < 1 ? ' AM' : ' PM';
     const minutes =
       date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
     const hours = date.getHours() % 12;
     const timeOfDay = `${hours}:${minutes}${ampm}`;
-    const year = date.getFullYear();
-    const month = date.getMonth();
+    const year = date.getFullYear() % 100;
+    const month = date.getMonth() + 1;
     const dayOfMonth = date.getDate();
-    const dayOfYear = `${year}/${month}/${dayOfMonth}`;
+    const dayOfYear = `${month}/${dayOfMonth}/${year}`;
     return `${dayOfYear} - ${timeOfDay}`;
   };
 
   const notificationDate = () => {
     return (
-      <Typography color="text.secondary">{convertDateToTime(notif)}</Typography>
+      <Typography {...styles.notifDate}>{convertDateToTime(notif)}</Typography>
     );
   };
 
@@ -84,7 +85,7 @@ const Notification = (props) => {
   const toggleReadButton = () => {
     return (
       <Button onClick={toggleRead} aria-label="toggleRead">
-        <Typography>
+        <Typography variant="Body 2" color="white">
           {notif.is_read ? 'Mark As Unread' : 'Mark As Read'}
         </Typography>
       </Button>
@@ -99,12 +100,10 @@ const Notification = (props) => {
   const actionButtons = () => {
     return (
       <Box>
-        <Button
-          onClick={viewNotification}
-          variant="contained"
-          aria-label="viewNotif"
-        >
-          <Typography>View Details</Typography>
+        <Button {...styles.notifViewButton} onClick={viewNotification}>
+          <Typography variant="Body 2" color="white">
+            View Details
+          </Typography>
         </Button>
         {toggleReadButton()}
       </Box>
@@ -113,7 +112,7 @@ const Notification = (props) => {
 
   const displayNotification = () => {
     return (
-      <Box id={notif.id} sx={{ display: 'flex' }}>
+      <Box id={notif.id} sx={{ display: 'flex', 'align-items': 'flex-start' }}>
         {messageIcon()}
         <Box>
           {notificationTitle()}
@@ -127,7 +126,7 @@ const Notification = (props) => {
   return (
     <Box>
       {displayNotification()}
-      <Divider style={{ width: '100%', padding: '3px' }} />
+      <Divider {...styles.divider} />
     </Box>
   );
 };

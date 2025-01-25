@@ -8,6 +8,8 @@ import { useFirestoreCollectionData } from 'reactfire';
 
 import Notification from '../Notification/Notification';
 
+import styles from './styles';
+
 import ROUTES from '@/libs/constants/routes';
 
 import { auth, firestore } from '@/libs/redux/store';
@@ -61,26 +63,38 @@ const NotificationList = (props) => {
 
   const showReadAlertButtons = () => {
     return (
-      <Card sx={{ display: 'inlineBlock' }}>
+      <Card {...styles.notificationFilterBackground}>
         <Button
-          variant={hideRead ? 'text' : 'contained'}
-          sx={{ minWidth: 300, borderRadius: '5px', margin: '5px' }}
-          color="primary"
+          sx={{
+            'background-color': hideRead ? 'transparent' : '#9D7BFF33',
+            border: hideRead ? '0px' : '0.5px solid #9D7BFF',
+            '&:hover': {
+              background: hideRead ? 'transparent' : '#9D7BFF',
+            },
+            ...styles.filterButton.sx,
+          }}
           onClick={() => {
             setHideRead(false);
           }}
+          disableElevation
         >
-          <Typography>All</Typography>
+          <Typography variant="Body 2">All</Typography>
         </Button>
         <Button
-          variant={hideRead ? 'contained' : 'text'}
-          sx={{ minWidth: 300, borderRadius: '5px', margin: '5px' }}
-          color="primary"
+          sx={{
+            'background-color': !hideRead ? 'transparent' : '#9D7BFF33',
+            border: !hideRead ? '0px' : '0.5px solid #9D7BFF',
+            '&:hover': {
+              background: !hideRead ? 'transparent' : '#9D7BFF',
+            },
+            ...styles.filterButton.sx,
+          }}
           onClick={() => {
             setHideRead(true);
           }}
+          disableElevation
         >
-          <Typography>{displayUnread()}</Typography>
+          <Typography variant="Body 2">{displayUnread()}</Typography>
         </Button>
       </Card>
     );
@@ -92,7 +106,7 @@ const NotificationList = (props) => {
       msgs = unreadMessages;
     }
     return (
-      <Box sx={{ maxHeight: '50vh', overflowY: 'scroll', margin: '3px' }}>
+      <Box {...styles.notificationListLimit}>
         {msgs.map((notif) => {
           return <Notification key={notif.id} notif={notif} />;
         })}
@@ -115,11 +129,20 @@ const NotificationList = (props) => {
             router.replace(ROUTES.NOTIFICATIONS);
           }}
           aria-label="toSettings"
+          disableElevation
         >
-          Go to Settings
+          <Typography variant="Body 2" color="white">
+            Go to Settings
+          </Typography>
         </Button>
-        <Button onClick={setAllRead} variant="contained" aria-label="readAll">
-          Mark all as read
+        <Button
+          {...styles.glowingButton}
+          onClick={setAllRead}
+          variant="contained"
+          aria-label="readAll"
+          disableElevation
+        >
+          <Typography variant="Body 2">Mark all as read</Typography>
         </Button>
       </Box>
     );
@@ -128,7 +151,7 @@ const NotificationList = (props) => {
   return (
     <Box>
       {showReadAlertButtons()}
-      <Divider sx={{ width: '100%', padding: '3px' }} />
+      <Divider {...styles.divider} />
       {notificationsList()}
       {globalButtons()}
     </Box>
