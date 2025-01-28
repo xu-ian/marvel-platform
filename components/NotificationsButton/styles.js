@@ -6,7 +6,16 @@ const styles = {
       '& .MuiBadge-badge': {
         color: 'white',
         backgroundColor: '#9D74FF',
+        fontFamily: 'Satoshi Regular',
+        fontSize: '12.8px',
+        'margin-top': '3px',
       },
+    },
+  },
+  notificationsIcon: {
+    sx: {
+      width: '1.3em',
+      height: 'auto',
     },
   },
   notificationsBox: {

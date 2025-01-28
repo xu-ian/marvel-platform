@@ -4,6 +4,8 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+
 import {
   Badge,
   Box,
@@ -34,11 +36,19 @@ const NotificationsButton = () => {
 
   const notificationsButton = () => {
     return (
-      <Badge badgeContent={notifications} {...styles.notificationsBadge}>
-        <IconButton onClick={toggleNotificationSidebar} aria-label="toggle">
-          <NotificationsIcon />
-        </IconButton>
-      </Badge>
+      <IconButton
+        onClick={toggleNotificationSidebar}
+        size="large"
+        aria-label="toggle"
+      >
+        <Badge badgeContent={notifications} {...styles.notificationsBadge}>
+          {notifications > 0 ? (
+            <NotificationsIcon {...styles.notificationsIcon} />
+          ) : (
+            <NotificationsNoneIcon {...styles.notificationsIcon} />
+          )}
+        </Badge>
+      </IconButton>
     );
   };
 
