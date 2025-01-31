@@ -5,7 +5,7 @@ admin.initializeApp();
 
 const userController = require('./controllers/userController');
 const marvelAIController = require('./controllers/marvelAIController');
-const notificationController = require('./controllers/notificationController');
+const notifTriggerController = require('./notificationController/index');
 const { seedDatabase } = require('./cloud_db_seed');
 
 seedDatabase();
@@ -24,14 +24,7 @@ module.exports = {
   createChatSession: marvelAIController.createChatSession,
 
   /* Notifications */
-  getNotifications: notificationController.getNotifications,
-  setReadStatus: notificationController.setNotificationStats,
-  onNewNotification: notificationController.onNewNotification,
-  onRemovedNotification: notificationController.onRemovedNotification,
-  onNewTool: notificationController.onNewTool,
-  onUpdatedTool: notificationController.onUpdatedTool,
-  onNewAssistant: notificationController.onNewAssistant,
-  onUpdatedAssistant: notificationController.onUpdatedAssistant,
+  ...notifTriggerController,
 
   /* Migration Scripts - For running  */
   ...migrationScripts,

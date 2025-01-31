@@ -16,34 +16,34 @@ jest.mock('@/libs/redux/store', () => {
 
 jest.mock('@/libs/services/notifications/setReadStatus', () => {
   return {
-    setReadStatus: jest.fn((a, b, c) => {}),
+    setReadStatus: jest.fn((_a, _b, _c) => {}),
   };
 });
 
 const dataone = [
   {
-    action_link: 'No_Action',
+    actionLink: 'No_Action',
     date: {
       seconds: 2,
       nanoseconds: 0,
     },
     description: 'Placeholder Text',
     id: '1',
-    is_read: true,
+    isRead: true,
     nid: '1',
     title: 'Welcome',
     type: 'Announcement',
     user: 'a',
   },
   {
-    action_link: 'No_Action',
+    actionLink: 'No_Action',
     date: {
       seconds: 1,
       nanoseconds: 0,
     },
     description: 'Placeholder Text 2',
     id: '2',
-    is_read: false,
+    isRead: false,
     nid: '2',
     title: 'Welcome 2',
     type: 'Announcement 2',
@@ -53,28 +53,28 @@ const dataone = [
 
 const datatwo = [
   {
-    action_link: 'No_Action',
+    actionLink: 'No_Action',
     date: {
       seconds: 2,
       nanoseconds: 0,
     },
     description: 'Placeholder Text',
     id: '1',
-    is_read: false,
+    isRead: false,
     nid: '1',
     title: 'Welcome',
     type: 'Announcement',
     user: 'a',
   },
   {
-    action_link: 'No_Action',
+    actionLink: 'No_Action',
     date: {
       seconds: 1,
       nanoseconds: 0,
     },
     description: 'Placeholder Text 2',
     id: '2',
-    is_read: false,
+    isRead: false,
     nid: '2',
     title: 'Welcome 2',
     type: 'Announcement 2',
@@ -84,28 +84,28 @@ const datatwo = [
 
 const datathree = [
   {
-    action_link: 'No_Action',
+    actionLink: 'No_Action',
     date: {
       seconds: 2,
       nanoseconds: 0,
     },
     description: 'Placeholder Text',
     id: '1',
-    is_read: true,
+    isRead: true,
     nid: '1',
     title: 'Welcome',
     type: 'Announcement',
     user: 'a',
   },
   {
-    action_link: 'No_Action',
+    actionLink: 'No_Action',
     date: {
       seconds: 1,
       nanoseconds: 0,
     },
     description: 'Placeholder Text 2',
     id: '2',
-    is_read: true,
+    isRead: true,
     nid: '2',
     title: 'Welcome 2',
     type: 'Announcement 2',

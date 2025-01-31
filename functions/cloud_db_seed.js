@@ -65,7 +65,7 @@ const seedDatabase = async () => {
           title: 'Welcome to Marvel AI',
           description: 'Placeholder text',
           date: Timestamp.fromMillis(Date.now()),
-          action_link: 'No_Action',
+          actionLink: 'No_Action',
         };
         const personalNotification = {
           id: pid,
@@ -75,12 +75,14 @@ const seedDatabase = async () => {
           title: 'Welcome to Marvel AI',
           description: 'Placeholder text',
           date: Timestamp.fromMillis(Date.now()),
-          action_link: 'No_Action',
-          is_read: false,
+          actionLink: 'No_Action',
+          isRead: false,
         };
         await db.collection('notifications').doc(nid).set(notification);
         await db
-          .collection('personal-notifications')
+          .collection('users')
+          .doc(userCredential.uid)
+          .collection('notifications')
           .doc(pid)
           .set(personalNotification);
 
@@ -92,11 +94,13 @@ const seedDatabase = async () => {
           title: 'Something Happened',
           description: 'Placeholder text 2',
           date: Timestamp.fromMillis(Date.now()),
-          action_link: 'No_Action',
-          is_read: false,
+          actionLink: 'No_Action',
+          isRead: false,
         };
         await db
-          .collection('personal-notifications')
+          .collection('users')
+          .doc(userCredential.uid)
+          .collection('notifications')
           .doc(pid2)
           .set(personalNotification2);
       } catch (notifErr) {

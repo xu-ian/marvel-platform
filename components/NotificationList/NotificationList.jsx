@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Box, Button, Card, Divider, Typography } from '@mui/material';
-import { collection, query, where } from 'firebase/firestore';
+import { collection, query } from 'firebase/firestore';
 
 import { useRouter } from 'next/router';
 import { useFirestoreCollectionData } from 'reactfire';
@@ -31,8 +31,11 @@ const NotificationList = (props) => {
   const [unreadMessages, setUnreadMessages] = useState([]);
   const [hideRead, setHideRead] = useState(false);
 
-  const notifCol = collection(firestore, 'personal-notifications');
-  const notifQuery = query(notifCol, where('user', '==', auth.currentUser.uid));
+  const notifCol = collection(
+    firestore,
+    `users/${auth.currentUser.uid}/notifications`
+  );
+  const notifQuery = query(notifCol);
   const { status, data: notifs } = useFirestoreCollectionData(notifQuery, {
     idField: 'id',
   });
@@ -47,7 +50,7 @@ const NotificationList = (props) => {
       });
       setMessages(notifs);
       const unread = notifs.filter((notif) => {
-        return !notif.is_read;
+        return !notif.isRead;
       });
       setUnreadMessages(unread);
       notifications(unread.length);
@@ -66,7 +69,7 @@ const NotificationList = (props) => {
       <Card {...styles.notificationFilterBackground}>
         <Button
           sx={{
-            'background-color': hideRead ? 'transparent' : '#9D7BFF33',
+            backgroundColor: hideRead ? 'transparent' : '#9D7BFF33',
             border: hideRead ? '0px' : '0.5px solid #9D7BFF',
             '&:hover': {
               background: hideRead ? 'transparent' : '#9D7BFF',
@@ -82,7 +85,7 @@ const NotificationList = (props) => {
         </Button>
         <Button
           sx={{
-            'background-color': !hideRead ? 'transparent' : '#9D7BFF33',
+            backgroundColor: !hideRead ? 'transparent' : '#9D7BFF33',
             border: !hideRead ? '0px' : '0.5px solid #9D7BFF',
             '&:hover': {
               background: !hideRead ? 'transparent' : '#9D7BFF',
@@ -116,7 +119,7 @@ const NotificationList = (props) => {
 
   const setAllRead = () => {
     messages.forEach((message) => {
-      message.is_read = true;
+      message.isRead = true;
     });
     setReadStatus(messages);
   };

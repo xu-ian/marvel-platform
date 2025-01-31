@@ -3,7 +3,7 @@ const styles = {
     sx: {
       display: 'flex',
       justifyContent: 'space-evenly',
-      'background-color': 'rgba(157,116,255,0.2)',
+      backgroundColor: 'rgba(157,116,255,0.2)',
       border: '0.5px solid #9D74FF',
     },
   },
@@ -28,7 +28,7 @@ const styles = {
       background: '#9D7BFF33',
       border: '0.5px solid #9D7BFF',
       color: 'white',
-      'margin-left': '20px',
+      marginLeft: '20px',
     },
   },
   divider: {
@@ -36,7 +36,7 @@ const styles = {
       width: '100%',
       padding: '3px',
       margin: '10px 0px 10px 0px',
-      'border-color': '#9D7BFF',
+      borderColor: '#9D7BFF',
     },
   },
 };

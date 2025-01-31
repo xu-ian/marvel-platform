@@ -30,7 +30,7 @@ const styles = {
       background: '#9D7BFF33',
       border: '0.5px solid #9D7BFF',
       borderRadius: '5px',
-      'margin-right': '20px',
+      marginRight: '20px',
       '&:hover': {
         background: '#9D7BFF',
       },
@@ -41,7 +41,7 @@ const styles = {
       width: '100%',
       padding: '3px',
       margin: '10px 0px 10px 0px',
-      'border-color': '#9D7BFF',
+      borderColor: '#9D7BFF',
     },
   },
 };

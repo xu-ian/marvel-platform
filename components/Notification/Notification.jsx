@@ -17,17 +17,17 @@ import { setReadStatus } from '@/libs/services/notifications/setReadStatus';
  * @param {string} notif.title - The title of the message.
  * @param {Date} notif.date - The date of the message.
  * @param {string} notif.description - The contents of the message.
- * @param {string} notif.is_read - The read status of the message.
+ * @param {string} notif.isRead - The read status of the message.
  * @param {string} notif.user - The user id the message is assigned to.
  * @param {string} notif.nid - The global notification(optional).
- * @param {string} notif.action_link - The link to the action associated with the notification.
+ * @param {string} notif.actionLink - The link to the action associated with the notification.
  * @return {JSX.Element} The JSX element representing the notifcation component.
  */
 
 const Notification = (props) => {
   const { notif } = props;
   const messageIcon = () => {
-    if (notif.is_read) {
+    if (notif.isRead) {
       return <NotificationsNoneIcon {...styles.notifIcon} />;
     }
     return (
@@ -61,7 +61,7 @@ const Notification = (props) => {
     const ampm = Math.floor(date.getHours() / 12) < 1 ? ' AM' : ' PM';
     const minutes =
       date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
-    const hours = date.getHours() % 12;
+    const hours = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
     const timeOfDay = `${hours}:${minutes}${ampm}`;
     const year = date.getFullYear() % 100;
     const month = date.getMonth() + 1;
@@ -78,7 +78,7 @@ const Notification = (props) => {
 
   const toggleRead = () => {
     const message = notif;
-    message.is_read = !message.is_read;
+    message.isRead = !message.isRead;
     setReadStatus([message]);
   };
 
@@ -86,7 +86,7 @@ const Notification = (props) => {
     return (
       <Button onClick={toggleRead} aria-label="toggleRead">
         <Typography variant="Body 2" color="white">
-          {notif.is_read ? 'Mark As Unread' : 'Mark As Read'}
+          {notif.isRead ? 'Mark As Unread' : 'Mark As Read'}
         </Typography>
       </Button>
     );
@@ -112,7 +112,7 @@ const Notification = (props) => {
 
   const displayNotification = () => {
     return (
-      <Box id={notif.id} sx={{ display: 'flex', 'align-items': 'flex-start' }}>
+      <Box id={notif.id} sx={{ display: 'flex', alignItems: 'flex-start' }}>
         {messageIcon()}
         <Box>
           {notificationTitle()}

@@ -8,7 +8,7 @@ const styles = {
         backgroundColor: '#9D74FF',
         fontFamily: 'Satoshi Regular',
         fontSize: '12.8px',
-        'margin-top': '3px',
+        marginTop: '3px',
       },
     },
   },
@@ -20,19 +20,19 @@ const styles = {
   },
   notificationsBox: {
     sx: {
-      'min-width': 447,
-      'min-height': 100,
+      minWidth: 447,
+      minHeight: 100,
       position: 'fixed',
       top: 70,
       right: 50,
-      'border-radius': '20px',
-      'background-color': '#0C0B1799',
+      borderRadius: '20px',
+      backgroundColor: '#0C0B1799',
     },
   },
   notificationsMenuBorder: {
     variant: 'outlined',
     sx: {
-      'border-radius': '20px',
+      borderRadius: '20px',
       border: '0.5px solid #9D7BFF',
     },
   },
@@ -41,7 +41,7 @@ const styles = {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      'margin-bottom': '10px',
+      marginBottom: '10px',
     },
   },
   notificationsTitle: {
